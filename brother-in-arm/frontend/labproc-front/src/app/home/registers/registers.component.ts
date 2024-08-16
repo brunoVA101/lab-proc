@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RegistersRowComponent } from './registers-row/registers-row.component';
 import { CompileResponse } from '../compile-response';
 
@@ -9,5 +9,5 @@ import { CompileResponse } from '../compile-response';
   templateUrl: './registers.component.html',
 })
 export class RegistersComponent {
-  registerValues: CompileResponse[] = [];
+  @Input() registerValues: CompileResponse[] = [];
 }
