@@ -46,7 +46,6 @@ export class HomeComponent {
     this.apiService.sendCompile(this.code).subscribe({
       next: (response) => {
         this.registers = response as CompileResponse[];
-        console.log(this.registers);
       },
     });
   }
@@ -54,8 +53,7 @@ export class HomeComponent {
   sendNext() {
     this.apiService.sendNext().subscribe({
       next: (response) => {
-        const typedResponse = response as CompileResponse;
-        console.log(typedResponse);
+        this.registers = response as CompileResponse[];
       },
     });
   }
