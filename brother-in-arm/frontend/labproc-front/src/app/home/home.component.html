@@ -4,10 +4,11 @@
       placeholder="Código Arm"
       class="resize-none border-solid border-black border-2 grow"
       matInput
+      [(ngModel)]="code"
     ></textarea>
     <div class="flex flex-row items-center justify-center gap-4">
-      <button mat-stroked-button>Compilar</button>
-      <button mat-fab extended (click)="fetchText()">
+      <button mat-stroked-button (click)="sendCompile()">Compilar</button>
+      <button mat-fab extended>
         <mat-icon>arrow_forward</mat-icon>
         Step
       </button>
@@ -15,6 +16,5 @@
   </div>
   <div class="flex border-2 p-4 flex-1">
     <span class="font-bold">Registers</span>
-    <p>{{ nextresponse }}</p>
   </div>
 </div>
