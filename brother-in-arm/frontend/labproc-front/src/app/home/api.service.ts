@@ -27,4 +27,18 @@ export class ApiService {
     console.log(response);
     return response;
   }
+  sendNext(): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Accept: '*/*',
+        'Access-Control-Allow-Origin': '*',
+      }),
+    };
+    const response = this.http.get(
+      `${this.apiUrl}/run/next`,
+      httpOptions
+    );
+    console.log(response);
+    return response;
+  }
 }
