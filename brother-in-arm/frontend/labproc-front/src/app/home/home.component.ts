@@ -5,11 +5,18 @@ import { MatInputModule } from '@angular/material/input';
 import { ApiService } from './api.service';
 import { FormsModule } from '@angular/forms';
 import { CompileResponse } from './compile-response';
+import { RegistersComponent } from './registers/registers.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MatIconModule, MatButtonModule, MatInputModule, FormsModule],
+  imports: [
+    MatIconModule,
+    MatButtonModule,
+    MatInputModule,
+    FormsModule,
+    RegistersComponent,
+  ],
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
@@ -17,7 +24,12 @@ export class HomeComponent {
 
   nextresponse: string = '';
   code: string = '';
-  registers: CompileResponse[] = [];
+  registers: CompileResponse[] = [
+    { register: 'r1', dec_value: '10', hex_value: '0x00' },
+    { register: 'r1', dec_value: '10', hex_value: '0x00' },
+    { register: 'r1', dec_value: '10', hex_value: '0x00' },
+    { register: 'r1', dec_value: '10', hex_value: '0x00' },
+  ];
 
   fetchText(): void {
     this.apiService.getTextResponse().subscribe({
