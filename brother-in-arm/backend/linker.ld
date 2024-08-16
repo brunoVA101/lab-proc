@@ -1,5 +1,5 @@
 SECTIONS {
-  . = 0x40000000;   /* 0x8000 para Raspberry Pi, 0x40000000 para qemu */
+  . = 0x40000000;
   .text : { 
      boot.o(.text)
      *(.text) 

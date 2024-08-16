@@ -20,12 +20,8 @@ async def go_next():
 
 @app.get("/run/back/")
 async def go_back():
-    return {"message": None}
+    return runtime.go_back()
 
-@app.get("/status/registers/")
-async def status_registers():
-    return {"message": None}
-
-@app.get("/status/")
-async def status():
+@app.get("/state/")
+async def state():
     return runtime.get_state()
