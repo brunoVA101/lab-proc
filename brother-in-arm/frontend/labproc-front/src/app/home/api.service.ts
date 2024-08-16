@@ -34,11 +34,18 @@ export class ApiService {
         'Access-Control-Allow-Origin': '*',
       }),
     };
-    const response = this.http.get(
-      `${this.apiUrl}/run/next`,
-      httpOptions
-    );
+    const response = this.http.get(`${this.apiUrl}/run/next`, httpOptions);
     console.log(response);
+    return response;
+  }
+  sendRunAll(): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Accept: '*/*',
+        'Access-Control-Allow-Origin': '*',
+      }),
+    };
+    const response = this.http.get(`${this.apiUrl}/run/all`, httpOptions);
     return response;
   }
 }

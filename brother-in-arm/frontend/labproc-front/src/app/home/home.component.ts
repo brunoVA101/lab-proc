@@ -55,4 +55,12 @@ export class HomeComponent {
       },
     });
   }
+
+  sendRunAll() {
+    this.apiService.sendRunAll().subscribe({
+      next: (response) => {
+        this.registers = response as CompileResponse[];
+      },
+    });
+  }
 }
