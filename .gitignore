@@ -4,3 +4,4 @@ __pycache__/
 !boot.o
 *.s
 *.map
+.venv/
