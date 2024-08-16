@@ -1,5 +1,8 @@
-<div class="flex gap-4">
+<div class="flex gap-4 items-stretch">
   <app-registers-row
-    *ngFor="let value of registerValues; let i = index" [index]="i" [value]="valueI"
+    *ngFor="let value of registerValues"
+    [name]="value.register"
+    [decValue]="value.dec_value"
+    [hexValue]="value.hex_value"
   ></app-registers-row>
 </div>

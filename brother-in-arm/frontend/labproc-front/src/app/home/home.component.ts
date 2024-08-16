@@ -17,6 +17,7 @@ export class HomeComponent {
 
   nextresponse: string = '';
   code: string = '';
+  registers: CompileResponse[] = [];
 
   fetchText(): void {
     this.apiService.getTextResponse().subscribe({
@@ -32,8 +33,8 @@ export class HomeComponent {
   sendCompile() {
     this.apiService.sendCompile(this.code).subscribe({
       next: (response) => {
-        const typedResponse = response as CompileResponse;
-        console.log(typedResponse);
+        this.registers = response as CompileResponse[];
+        console.log(this.registers);
       },
     });
   }

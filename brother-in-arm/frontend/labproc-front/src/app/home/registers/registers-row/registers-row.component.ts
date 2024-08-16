@@ -7,6 +7,7 @@ import { Component, Input } from '@angular/core';
   templateUrl: './registers-row.component.html',
 })
 export class RegistersRowComponent {
-  @Input() index: number = 0;
-  @Input() value: string = '(no value)';
+  @Input() name: string = '';
+  @Input() decValue: string = '';
+  @Input() hexValue: string = '';
 }

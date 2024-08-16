@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RegistersRowComponent } from './registers-row/registers-row.component';
+import { CompileResponse } from '../compile-response';
 
 @Component({
   selector: 'app-registers',
@@ -8,13 +9,5 @@ import { RegistersRowComponent } from './registers-row/registers-row.component';
   templateUrl: './registers.component.html',
 })
 export class RegistersComponent {
-  registerValues: string[] = [
-    '(no value)',
-    '(no value)',
-    '(no value)',
-    '(no value)',
-    '(no value)',
-    '(no value)',
-    '(no value)',
-  ];
+  registerValues: CompileResponse[] = [];
 }

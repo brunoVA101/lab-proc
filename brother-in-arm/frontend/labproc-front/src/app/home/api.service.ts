@@ -15,7 +15,6 @@ export class ApiService {
     const httpOptions = {
       headers: new HttpHeaders({
         Accept: '*/*',
-        'Access-Control-Allow-Origin': '*',
       }),
     };
     let fd = new FormData();
