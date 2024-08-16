@@ -37,4 +37,13 @@ export class HomeComponent {
       },
     });
   }
+
+  sendNext() {
+    this.apiService.sendNext().subscribe({
+      next: (response) => {
+        const typedResponse = response as CompileResponse;
+        console.log(typedResponse);
+      },
+    });
+  }
 }
