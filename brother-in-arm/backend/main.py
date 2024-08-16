@@ -33,6 +33,10 @@ async def compile(code: Annotated[str, Form()]):
 async def go_next():
     return runtime.go_next()
 
+@app.get("/run/all/")
+async def run_all():
+    return runtime.run_all()
+
 @app.get("/run/back/")
 async def go_back():
     return runtime.go_back()
