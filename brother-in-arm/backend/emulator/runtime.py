@@ -58,9 +58,11 @@ class GdbRuntime:
         self.gdb.write('file temp.elf')
         ##self.gdb.write('y')
         self.gdb.write('b main')
-        return self.gdb.write('continue')
+        self.gdb.write('continue')
+        return self.get_state()
     def go_next(self):
-        return self.gdb.write('step')
+        self.gdb.write('step')
+        return self.get_state()
     def go_back(self):
         return self.compile()
     def get_state(self):
