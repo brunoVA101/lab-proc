@@ -2,6 +2,8 @@ from pygdbmi.gdbcontroller import GdbController
 import subprocess
 import socket
 import time
+import os
+import signal
 
 def wait_for_port(host, port, timeout=0.1):
     while True:
@@ -12,6 +14,16 @@ def wait_for_port(host, port, timeout=0.1):
                 break
             except (ConnectionRefusedError, socket.timeout):
                 time.sleep(0.01)  # Wait for 1 second before retrying
+
+def convertToDec(hex: str):
+    try:
+        unsigned_value = int(hex, 16)
+        return str(unsigned_value)
+    except:
+        return 0
+
+    
+
 
 class GdbRuntime:
     SHOWN_REGISTERS = [
@@ -63,6 +75,11 @@ class GdbRuntime:
     def go_next(self):
         self.gdb.write('step')
         return self.get_state()
+    def run_all(self):
+        # Send the run command
+        self.gdb.write('continue', raise_error_on_timeout=False, timeout_sec=2)
+        os.kill(self.gdb.gdb_process.pid, signal.SIGINT)
+        return self.get_state()
     def go_back(self):
         return self.compile()
     def get_state(self):
@@ -74,14 +91,14 @@ class GdbRuntime:
                 registers.append({
                     "register": reg[1],
                     "hex_value": reg[2],
-                    "dec_value": reg[3] 
+                    "dec_value": convertToDec(reg[2]) 
                 })
             
             else:
                 registers.append({
                     "register": reg[0],
                     "hex_value": reg[1],
-                    "dec_value": reg[2] 
+                    "dec_value": convertToDec(reg[1])  
                 })
         registers = [reg for reg in registers if reg["register"] in GdbRuntime.SHOWN_REGISTERS]
         return registers
