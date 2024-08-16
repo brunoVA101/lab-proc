@@ -1,4 +1,9 @@
 <div class="flex flex-col gap-4 items-stretch">
+  <div class="flex justify-between">
+    <span><strong>Nome</strong></span>
+    <span><strong>Hex</strong></span>
+    <span><strong>Dec</strong></span>
+  </div>
   <div *ngFor="let value of registerValues">
     <app-registers-row
       [name]="value.register"

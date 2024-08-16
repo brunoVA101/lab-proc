@@ -6,6 +6,8 @@ import { ApiService } from './api.service';
 import { FormsModule } from '@angular/forms';
 import { CompileResponse } from './compile-response';
 import { RegistersComponent } from './registers/registers.component';
+import { CodemirrorModule } from '@ctrl/ngx-codemirror';
+import { NgModule } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +17,7 @@ import { RegistersComponent } from './registers/registers.component';
     MatButtonModule,
     MatInputModule,
     FormsModule,
+    CodemirrorModule,
     RegistersComponent,
   ],
   templateUrl: './home.component.html',
@@ -24,12 +27,7 @@ export class HomeComponent {
 
   nextresponse: string = '';
   code: string = '';
-  registers: CompileResponse[] = [
-    { register: 'r1', dec_value: '10', hex_value: '0x00' },
-    { register: 'r1', dec_value: '10', hex_value: '0x00' },
-    { register: 'r1', dec_value: '10', hex_value: '0x00' },
-    { register: 'r1', dec_value: '10', hex_value: '0x00' },
-  ];
+  registers: CompileResponse[] = [];
 
   fetchText(): void {
     this.apiService.getTextResponse().subscribe({

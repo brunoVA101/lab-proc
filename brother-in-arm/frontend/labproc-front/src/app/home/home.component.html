@@ -1,8 +1,9 @@
 <div class="flex flex-row w-full grow items-stretch">
   <div class="flex flex-col p-4 border-2 flex-1 gap-4">
+    <h4 class="font-bold">Código</h4>
     <textarea
       placeholder="Código Arm"
-      class="resize-none border-solid border-black border-2 grow"
+      class="resize-none border-solid border-gray-200 border-2 grow"
       matInput
       [(ngModel)]="code"
     ></textarea>
@@ -15,7 +16,7 @@
     </div>
   </div>
   <div class="flex flex-col gap-4 border-2 p-4 flex-1">
-    <span class="font-bold">Registers</span>
+    <h4 class="font-bold">Registradores</h4>
     <app-registers [registerValues]="registers"></app-registers>
   </div>
 </div>
