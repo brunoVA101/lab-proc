@@ -33,7 +33,7 @@ export class HomeComponent {
   labelarray: string[] = ['r0', 'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7', 'r8', 'r9', 'r10', 'r11', 'r12']
 
   inst: string = 'Aguardando próxima instrução';
-  cpsr: string = '0x00000000';
+  cpsr: string = '00000000000000000000000000000000';
   analysisInst(){
     var parsed = this.inst.replace(/,/g, '').split(' ');
     //parsed.forEach(word => {
