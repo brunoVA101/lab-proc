@@ -52,6 +52,7 @@ class GdbRuntime:
         "cpsr",
     ]
     currentinst = None
+    cpsr = None
     def __init__(self):
         self.gdb = None
         self.qemu_process = None
@@ -114,6 +115,11 @@ class GdbRuntime:
                     "dec_value": convertToDec(reg[1])  
                 })
         registers = [reg for reg in registers if reg["register"] in GdbRuntime.SHOWN_REGISTERS]
+        self.cpsr = registers[-1]["hex_value"]
         return registers
     def instruction(self):
-        return {"current" : self.currentinst}
+        #print(self.gdb.write('x/i $pc')[0]["payload"])
+        #print(self.gdb.write('info locals')[0]["payload"])
+        #print(self.gdb.write('info args')[0]["payload"])
+        cpsrbin = bin(int(self.cpsr, 16))[2:]
+        return {"current" : self.currentinst, "cpsr": cpsrbin.zfill(32)}
