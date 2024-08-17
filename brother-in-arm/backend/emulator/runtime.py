@@ -27,6 +27,7 @@ def convertToDec(hex: str):
 
 class GdbRuntime:
     SHOWN_REGISTERS = [
+        "r0",
         "r1",
         "r2",
         "r3",
