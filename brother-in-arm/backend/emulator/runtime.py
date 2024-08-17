@@ -4,7 +4,7 @@ import socket
 import time
 import os
 import signal
-
+import re
 def wait_for_port(host, port, timeout=0.1):
     while True:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
@@ -21,7 +21,13 @@ def convertToDec(hex: str):
         return str(unsigned_value)
     except:
         return 0
-
+def parseInstruction(inst: str):
+    numbermatch = re.search(r'\d', inst)
+    instruction = inst[numbermatch.start():]
+    lettermatch = re.search(r'[a-zA-Z]', instruction)
+    if lettermatch:
+        return instruction[lettermatch.start():]
+    return ""
     
 
 
@@ -45,7 +51,7 @@ class GdbRuntime:
         "pc",
         "cpsr",
     ]
-
+    currentinst = None
     def __init__(self):
         self.gdb = None
         self.qemu_process = None
@@ -71,10 +77,16 @@ class GdbRuntime:
         self.gdb.write('file temp.elf')
         ##self.gdb.write('y')
         self.gdb.write('b main')
-        self.gdb.write('continue')
+
+        instruction = self.gdb.write('continue')
+        self.currentinst = parseInstruction(instruction[-1]["payload"])
+
         return self.get_state()
     def go_next(self):
-        self.gdb.write('step')
+
+        instruction = self.gdb.write('step')
+        self.currentinst = parseInstruction(instruction[0]["payload"])
+
         return self.get_state()
     def run_all(self):
         # Send the run command
@@ -102,4 +114,5 @@ class GdbRuntime:
                     "dec_value": convertToDec(reg[1])  
                 })
         registers = [reg for reg in registers if reg["register"] in GdbRuntime.SHOWN_REGISTERS]
+        #print(self.currentinst)
         return registers
