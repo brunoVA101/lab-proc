@@ -32,8 +32,8 @@
     {{ cpsr }}
     <br>
     <div>
-      <div *ngFor="let i of labelarray; let index = index">
-        <input type="text" [(ngModel)]="labelarray[index]" placeholder="rótulo de r{{index}}">
+      <div *ngFor="let i of labelarray; let index = index; trackBy: trackByFn">
+        <input type="text" [(ngModel)]="labelarray[index]" placeholder="rótulo de r{{index}}" >
       </div>
       
     </div>

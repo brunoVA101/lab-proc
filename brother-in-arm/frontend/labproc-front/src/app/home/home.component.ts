@@ -36,10 +36,17 @@ export class HomeComponent {
   cpsr: string = '0x00000000';
   analysisInst(){
     var parsed = this.inst.replace(/,/g, '').split(' ');
-    parsed.forEach(word => {
-      console.log(word)
-    })
-    var firstarg = this.labelarray[0]
+    //parsed.forEach(word => {
+    //  console.log(word)
+    //})
+    var firstarg = '';
+    for(let i = 12; i >= 0; i--){
+      const regex = new RegExp(`r${i}`, 'gi');
+      if(regex.test(parsed[1])){
+        firstarg = parsed[1].replace(regex, this.labelarray[i]);
+      }
+    }
+    // var firstarg = this.labelarray[0]
     switch(parsed[0]){
       case "BL":
         return "Saltar para subrotina " + parsed[1]
@@ -90,5 +97,8 @@ export class HomeComponent {
         this.registers = response as CompileResponse[];
       },
     });
+  }
+  trackByFn(index: any, item: any) {
+    return index;  
   }
 }
