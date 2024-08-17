@@ -48,4 +48,15 @@ export class ApiService {
     const response = this.http.get(`${this.apiUrl}/run/all`, httpOptions);
     return response;
   }
+  getInstruction(): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Accept: '*/*',
+        'Access-Control-Allow-Origin': '*',
+      }),
+    };
+    const response = this.http.get(`${this.apiUrl}/instruction`, httpOptions);
+    console.log(response);
+    return response;
+  }
 }

@@ -44,3 +44,7 @@ async def go_back():
 @app.get("/state/")
 async def state():
     return runtime.get_state()
+
+@app.get("/instruction/")
+async def instruction():
+    return runtime.instruction()

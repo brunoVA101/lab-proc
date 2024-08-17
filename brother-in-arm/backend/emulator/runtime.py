@@ -27,7 +27,7 @@ def parseInstruction(inst: str):
     lettermatch = re.search(r'[a-zA-Z]', instruction)
     if lettermatch:
         return instruction[lettermatch.start():]
-    return ""
+    return "Aguardando próxima instrução"
     
 
 
@@ -114,5 +114,6 @@ class GdbRuntime:
                     "dec_value": convertToDec(reg[1])  
                 })
         registers = [reg for reg in registers if reg["register"] in GdbRuntime.SHOWN_REGISTERS]
-        #print(self.currentinst)
         return registers
+    def instruction(self):
+        return {"current" : self.currentinst}

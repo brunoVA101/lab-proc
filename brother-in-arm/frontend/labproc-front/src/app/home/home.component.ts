@@ -29,22 +29,20 @@ export class HomeComponent {
   code: string = '';
   registers: CompileResponse[] = [];
 
-  fetchText(): void {
-    this.apiService.getTextResponse().subscribe({
-      next: (data) => {
-        this.nextresponse = data;
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
-  }
+  inst: string = 'Aguardando próxima instrução';
 
   sendCompile() {
     this.apiService.sendCompile(this.code).subscribe({
       next: (response) => {
         this.registers = response as CompileResponse[];
       },
+      complete: () =>{
+        this.apiService.getInstruction().subscribe({
+          next: (response) => {
+            this.inst = response.current;
+          }
+        })
+      }
     });
   }
 
@@ -53,6 +51,13 @@ export class HomeComponent {
       next: (response) => {
         this.registers = response as CompileResponse[];
       },
+      complete: () =>{
+        this.apiService.getInstruction().subscribe({
+          next: (response) => {
+            this.inst = response.current;
+          }
+        })
+      }
     });
   }
 
