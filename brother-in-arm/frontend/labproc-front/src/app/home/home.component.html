@@ -41,6 +41,7 @@
     <br>
     Overflow: {{ cpsr[3] }}
     <br>
+    {{ positions }}
     <div>
       <div *ngFor="let i of labelarray; let index = index; trackBy: trackByFn">
         <input type="text" [(ngModel)]="labelarray[index]" placeholder="rótulo de r{{index}}" >

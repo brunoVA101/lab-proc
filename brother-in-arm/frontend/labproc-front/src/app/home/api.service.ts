@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CompileResponse } from './compile-response';
 @Injectable({
@@ -48,15 +48,17 @@ export class ApiService {
     const response = this.http.get(`${this.apiUrl}/run/all`, httpOptions);
     return response;
   }
-  getInstruction(): Observable<any> {
+  getInstruction(mempos: string): Observable<any> {
+    const params = new HttpParams().append("mempos", mempos);
     const httpOptions = {
       headers: new HttpHeaders({
         Accept: '*/*',
         'Access-Control-Allow-Origin': '*',
       }),
+      params: params
     };
+    
     const response = this.http.get(`${this.apiUrl}/instruction`, httpOptions);
-    console.log(response);
     return response;
   }
 }

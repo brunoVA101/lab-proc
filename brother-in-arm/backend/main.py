@@ -46,5 +46,5 @@ async def state():
     return runtime.get_state()
 
 @app.get("/instruction/")
-async def instruction():
-    return runtime.instruction()
+async def instruction(mempos: str = '$pc'):
+    return runtime.instruction(mempos=mempos)

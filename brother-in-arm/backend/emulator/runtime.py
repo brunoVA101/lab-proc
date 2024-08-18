@@ -117,9 +117,19 @@ class GdbRuntime:
         registers = [reg for reg in registers if reg["register"] in GdbRuntime.SHOWN_REGISTERS]
         self.cpsr = registers[-1]["hex_value"]
         return registers
-    def instruction(self):
+    def instruction(self, mempos: str):
         #print(self.gdb.write('x/i $pc')[0]["payload"])
         #print(self.gdb.write('info locals')[0]["payload"])
         #print(self.gdb.write('info args')[0]["payload"])
+        print(mempos)
+        positions = ''
+        memdump = self.gdb.write('x/10x '+ mempos)
+        for count, dict in enumerate(memdump):
+            instline = dict["payload"].replace('\t', '  ').replace('(gdb) ', '')
+            if count == 0:
+                positions += instline + "\n"
+            else:
+                positions += instline.split(':')[1]+ "\n"
+        
         cpsrbin = bin(int(self.cpsr, 16))[2:]
-        return {"current" : self.currentinst, "cpsr": cpsrbin.zfill(32)}
+        return {"current" : self.currentinst, "cpsr": cpsrbin.zfill(32), "positions": positions}

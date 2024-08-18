@@ -31,12 +31,13 @@ export class HomeComponent {
   code: string = '';
   registers: CompileResponse[] = [];
   labelarray: string[] = ['r0', 'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7', 'r8', 'r9', 'r10', 'r11', 'r12']
-
+  mempos: string = '$sp';
   stepping: boolean = false;
   timer: number = 1000;
   private timersub: any;
   inst: string = 'Aguardando próxima instrução';
   cpsr: string = '00000000000000000000000000000000';
+  positions: string = '';
   analysisInst(){
     var parsed = this.inst.replace(/,/g, '').split(' ');
     //parsed.forEach(word => {
@@ -76,6 +77,8 @@ export class HomeComponent {
       case "EOR":
       case "EORS":
         return "Armazenar em " + firstarg + " " + secondarg + " XOR " + thirdarg;
+      case "BX":
+        return "Retornar de subrotina: endereço " + parsed[1]
       default:
         return "..."
     }
@@ -87,10 +90,11 @@ export class HomeComponent {
         this.registers = response as CompileResponse[];
       },
       complete: () =>{
-        this.apiService.getInstruction().subscribe({
+        this.apiService.getInstruction(this.mempos).subscribe({
           next: (response) => {
             this.inst = response.current;
             this.cpsr = response.cpsr;
+            this.positions = response.positions;
           }
         })
       }
@@ -103,10 +107,11 @@ export class HomeComponent {
         this.registers = response as CompileResponse[];
       },
       complete: () =>{
-        this.apiService.getInstruction().subscribe({
+        this.apiService.getInstruction(this.mempos).subscribe({
           next: (response) => {
             this.inst = response.current;
             this.cpsr = response.cpsr;
+            this.positions = response.positions;
           }
         })
       }
