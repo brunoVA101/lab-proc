@@ -33,7 +33,13 @@
     <br>
     {{ analysisInst() }}
     <br>
-    {{ cpsr[0] }}
+    Negativo: {{ cpsr[0] }}
+    <br>
+    Zero: {{ cpsr[1] }}
+    <br>
+    Carry: {{ cpsr[2] }}
+    <br>
+    Overflow: {{ cpsr[3] }}
     <br>
     <div>
       <div *ngFor="let i of labelarray; let index = index; trackBy: trackByFn">
