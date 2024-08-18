@@ -9,7 +9,7 @@ import { RegistersComponent } from './registers/registers.component';
 import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { interval, Subscription } from 'rxjs';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -32,6 +32,9 @@ export class HomeComponent {
   registers: CompileResponse[] = [];
   labelarray: string[] = ['r0', 'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7', 'r8', 'r9', 'r10', 'r11', 'r12']
 
+  stepping: boolean = false;
+  timer: number = 1000;
+  private timersub: any;
   inst: string = 'Aguardando próxima instrução';
   cpsr: string = '00000000000000000000000000000000';
   analysisInst(){
@@ -100,5 +103,16 @@ export class HomeComponent {
   }
   trackByFn(index: any, item: any) {
     return index;  
+  }
+  toggleTimer(){
+    if(this.stepping == true){
+      this.stepping = false;
+      this.timersub.unsubscribe();
+    }else{
+      this.stepping = true;
+      this.timersub = interval(this.timer).subscribe(
+        x => { this.sendNext() }
+      );
+    }
   }
 }

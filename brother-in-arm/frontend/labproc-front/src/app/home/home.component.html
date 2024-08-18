@@ -9,6 +9,10 @@
     ></textarea>
     <div class="flex flex-row items-center justify-center gap-4">
       <button mat-stroked-button (click)="sendCompile()">Compilar</button>
+      <button mat-fab extended (click)="toggleTimer()">
+        <mat-icon>arrow_forward</mat-icon>
+        Step periodically
+      </button>
       <button mat-fab extended (click)="sendNext()">
         <mat-icon>arrow_forward</mat-icon>
         Step
