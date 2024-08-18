@@ -23,11 +23,11 @@
       </button>
     </div>
   </div>
-  <div class="flex flex-col gap-4 border-2 p-4 flex-1">
+  <div class="flex flex-col gap-2 p-4 flex-1">
     <h4 class="font-bold">Registradores</h4>
     <app-registers [registerValues]="registers"></app-registers>
   </div>
-  <div class="flex flex-col gap-4 border-2 p-4 flex-1">
+  <div class="flex flex-col gap-2 border-2 p-4 flex-1">
     <h4 class="font-bold">Instrução</h4>
     {{ inst }}
     <br>
@@ -47,6 +47,8 @@
         <input type="text" [(ngModel)]="labelarray[index]" placeholder="rótulo de r{{index}}" >
       </div>
       A cada(ms):<input type="text" [(ngModel)]="timer" placeholder="" >
+      <br>
+      Ver memória a partir de: <input type="text" [(ngModel)]="mempos" placeholder="" >
     </div>
   </div>
   
