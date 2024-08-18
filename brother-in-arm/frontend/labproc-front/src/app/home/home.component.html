@@ -11,15 +11,15 @@
       <button mat-stroked-button (click)="sendCompile()">Compilar</button>
       <button mat-fab extended (click)="toggleTimer()">
         <mat-icon>arrow_forward</mat-icon>
-        Step periodically
+        Passo periód.
       </button>
       <button mat-fab extended (click)="sendNext()">
         <mat-icon>arrow_forward</mat-icon>
-        Step
+        Passo
       </button>
       <button mat-fab extended (click)="sendRunAll()">
         <mat-icon>arrow_forward</mat-icon>
-        Run All
+        Executar
       </button>
     </div>
   </div>
@@ -27,19 +27,19 @@
     <h4 class="font-bold">Registradores</h4>
     <app-registers [registerValues]="registers"></app-registers>
   </div>
-  <div class="flex flex-col gap-4 border-2 p-4 flex-2">
+  <div class="flex flex-col gap-4 border-2 p-4 flex-1">
     <h4 class="font-bold">Instrução</h4>
     {{ inst }}
     <br>
     {{ analysisInst() }}
     <br>
-    {{ cpsr }}
+    {{ cpsr[0] }}
     <br>
     <div>
       <div *ngFor="let i of labelarray; let index = index; trackBy: trackByFn">
         <input type="text" [(ngModel)]="labelarray[index]" placeholder="rótulo de r{{index}}" >
       </div>
-      
+      A cada(ms):<input type="text" [(ngModel)]="timer" placeholder="" >
     </div>
   </div>
   

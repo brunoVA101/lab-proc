@@ -42,11 +42,19 @@ export class HomeComponent {
     //parsed.forEach(word => {
     //  console.log(word)
     //})
-    var firstarg = '';
+    var firstarg = parsed[1];
+    var secondarg = parsed[2];
+    var thirdarg = parsed[3];
     for(let i = 12; i >= 0; i--){
       const regex = new RegExp(`r${i}`, 'gi');
       if(regex.test(parsed[1])){
         firstarg = parsed[1].replace(regex, this.labelarray[i]);
+      }
+      if(regex.test(parsed[2])){
+        secondarg = parsed[2].replace(regex, this.labelarray[i]);
+      }
+      if(regex.test(parsed[3])){
+        thirdarg = parsed[3].replace(regex, this.labelarray[i]);
       }
     }
     // var firstarg = this.labelarray[0]
@@ -54,9 +62,20 @@ export class HomeComponent {
       case "BL":
         return "Saltar para subrotina " + parsed[1]
       case "BEQ":
-        return "Saltar para subrotina " + parsed[1] + " se flag zero for 1"
+        return "Saltar para subrotina " + parsed[1] + " se resultado for zero"
       case "MOV":
         return "Armazenar em " + firstarg + " a constante " + parsed[2]
+      case "SUB":
+      case "SUBS":
+        return "Armazenar em " + firstarg + " " + secondarg + " menos " + thirdarg;
+      case "ADD":
+      case "ADDS":
+        return "Armazenar em " + firstarg + " " + secondarg + " mais " + thirdarg;
+      case "STR":
+        return "A posição de memória " + secondarg +"+"+ thirdarg + " receberá o valor de " + firstarg;
+      case "EOR":
+      case "EORS":
+        return "Armazenar em " + firstarg + " " + secondarg + " XOR " + thirdarg;
       default:
         return "..."
     }
